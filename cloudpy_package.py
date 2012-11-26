@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from cloudpy_deps import DepsFinder
 from cloudpy_files import DirTree
 from cloudpy_struct import DirStruct
