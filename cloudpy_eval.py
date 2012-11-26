@@ -68,4 +68,4 @@ if __name__ == '__main__':
     agent.setup_env(args.quiet)
     agent.run()
     if args.clean:
-        sh.rm("-rf", args.package)
+        sh.rm("-rf", agent.dir.TOP)
