@@ -11,11 +11,8 @@ class DirStruct(object):
         "ENV_DIR":"env"
     }
 
-    def __init__(self, top=None):
-        if top:
-            self.TOP = os.path.abspath(top)
-        else:
-            self.TOP = uuid.uuid1().hex
+    def __init__(self, top):
+        self.TOP = os.path.abspath(top)
         self.make_dir()
 
 

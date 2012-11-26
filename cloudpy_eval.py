@@ -54,7 +54,6 @@ class Agent(object):
         sh.python(self.mainfile, _out=self.print_output).wait()
 
 
-
 if __name__ == '__main__':
     from sys import argv
     import argparse
@@ -62,8 +61,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='run python script in a virtual environment.')
     parser.add_argument("package", help="Package Top Dir Location")
     parser.add_argument("-q", "--quiet", action='store_true')
+    parser.add_argument("-c", "--clean", action='store_true')
     args = parser.parse_args(argv[1:])
 
     agent = Agent(args.package)
     agent.setup_env(args.quiet)
     agent.run()
+    if args.clean:
+        sh.rm("-rf", args.package)

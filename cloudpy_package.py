@@ -5,6 +5,7 @@ from cloudpy_files import DirTree
 from cloudpy_struct import DirStruct
 import os
 import shutil
+import uuid
 
 
 class Package(object):
@@ -13,7 +14,11 @@ class Package(object):
         self.df = DepsFinder(mainfile, guess_mods, guess_files)
         self.dt = DirTree(self.df.needed_files)
         self.files = []
-        self.dir = DirStruct(name)
+        if name:
+            self.name = name
+        else:
+            self.name = uuid.uuid1().hex
+        self.dir = DirStruct(self.name)
 
     def build(self):
         for f in self.df.needed_files:
@@ -62,3 +67,4 @@ if __name__ == '__main__':
 
     p = Package(args.script, args.name, args.mods, args.files)
     p.build()
+    print p.name
