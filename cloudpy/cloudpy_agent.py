@@ -41,7 +41,7 @@ class Agent(object):
             outproc = self.print_output
         env_dir = self.dir.ENV_DIR
         if not os.path.exists(env_dir):
-            sh.virtualenv(env_dir, _out=outproc).wait()
+            sh.virtualenv("--system-site-packages", env_dir, _out=outproc).wait()
         activate_this = self.dir.append("ENV_DIR",'bin/activate_this.py')
         execfile(activate_this, dict(__file__=activate_this))
         sh.pip.install(self.mods, _out=outproc).wait()
