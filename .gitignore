@@ -8,6 +8,7 @@
 *.egg-info
 dist
 build
+bin
 eggs
 parts
 var
@@ -34,5 +35,3 @@ nosetests.xml
 .pydevproject
 
 .DS_Store
-
-test_demo.py
