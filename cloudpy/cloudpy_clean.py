@@ -3,4 +3,5 @@
 import sh
 from sys import argv
 
-sh.rm("-rf", argv[1])
+def clean(tmp_dir):
+    sh.rm("-rf", tmp_dir)
