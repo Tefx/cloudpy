@@ -2,13 +2,11 @@
 
 from sys import argv
 import argparse
-from cloudpy_config import Config
 import sh
 
 
 sync_prog = sh.rsync.bake("-r")
-config = Config()
 
-def sync(package):
+def sync(package, config):
     desc = "%s:%s" % (config.host, config.depository)
     sync_prog(package, desc)
