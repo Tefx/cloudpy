@@ -5,17 +5,15 @@ import sys
 import argparse
 from sys import argv
 
-
-eval_prog = "cloudpy-eval"
-
 def run(package, noisy, clean, config):
     ENDLINE = "Connection to %s closed." % config.host.split("@")[1]
     target = config.host_sep.join([config.depository, package])
+    eval_prog = "cloudpy-eval"
 
     if not noisy:
-        eval_cmd += " -q"
+        eval_prog += " -q"
     if clean:
-        eval_cmd += " -c"
+        eval_prog += " -c"
 
     def print_line(line):
         if line.strip() == ENDLINE:

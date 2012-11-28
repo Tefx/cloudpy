@@ -19,7 +19,7 @@ def main():
     parser.add_argument("-f", "--files", action='store_true')
     parser.add_argument("-n", "--name", action='store')
     parser.add_argument("-N", "--noisy", action='store_true')
-    parser.add_argument("-c", "--clean", action='store_true')
+    parser.add_argument("-c", "--cls", action='store_true')
 
     parser.add_argument("-P", "-pack", action="store_true")
     parser.add_argument("-S", "-sync", action="store_true")
@@ -37,6 +37,7 @@ def main():
         args.R = True
         if not args.name:
             args.C = True
+            args.cls = True
 
     if args.P:
         if args.noisy:
@@ -51,7 +52,7 @@ def main():
     if args.R:
         if args.noisy:
             print "Running...\n*****************\n"
-        run(name, args.noisy, args.clean, config)
+        run(name, args.noisy, args.cls, config)
 
     if args.C:
         if args.noisy:

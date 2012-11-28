@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='cloudpy',
-      version='0.1.1',
+      version='0.1.2',
       description='Run Python Scripts in virtual environment on an remote host',
       author='Zhu Zhaomeng',
       author_email='zhaomeng.zhu@gmail.com',

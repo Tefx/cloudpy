@@ -2,7 +2,7 @@ import os
 
 
 CONF_LOC = ["/etc/cloudpy.conf",
-            "~/.cloudpy.conf",
+            os.path.join(os.path.expanduser("~"), ".cloudpy.conf"),
             "./cloudpy.conf"]
 
 class Config(object):

@@ -6,6 +6,8 @@ run python script in virtual environment on a remote platform
 
 # Install
     $pip install cloudpy
+And a config file is also needed. You can put the configurations in `/etc/cloudpy.conf`, `~/.cloudpy.conf`, or `./cloudpy.conf`.    
+See the cloudpy.conf for a sample.
     
 # Usage
 ## The easy way
