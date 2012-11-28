@@ -44,7 +44,8 @@ class Agent(object):
             sh.virtualenv("--system-site-packages", env_dir, _out=outproc).wait()
         activate_this = self.dir.append("ENV_DIR",'bin/activate_this.py')
         execfile(activate_this, dict(__file__=activate_this))
-        sh.pip.install(self.mods, _out=outproc).wait()
+        if self.mods:
+            sh.pip.install(self.mods, _out=outproc).wait()
 
     def print_output(self, line):
         sys.stdout.write(line)
