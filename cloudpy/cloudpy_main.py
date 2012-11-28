@@ -31,7 +31,7 @@ def main():
     name = args.script
     config = Config()
 
-    if not (args.P and args.S and args.R and args.C):
+    if not (args.P or args.S or args.R or args.C):
         args.P = True
         args.S = True
         args.R = True
