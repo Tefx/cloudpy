@@ -22,6 +22,10 @@ Send to remote host. The package name has been return by "-P" command
 Run!
     
     $cloudpy -C your_package_name
+    
+=======
+
+
 Clean.
 
 =======
@@ -131,3 +135,5 @@ Clean操作删除本地生成的目录。
 `cloudpy-eval`默认输出全部信息，包括创建和安装虚拟环境。使用`-q`只显示程序输出。
 
 `-c`参数在执行完成后删除包。
+
+=====
