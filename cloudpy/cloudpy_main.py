@@ -15,7 +15,6 @@ def main():
     parser = argparse.ArgumentParser(description='package a python script.')
     parser.add_argument("script", help="Script or packed package")
 
-    parser.add_argument("-m", "--mods", action='store_true')
     parser.add_argument("-f", "--files", action='store_true')
     parser.add_argument("-n", "--name", action='store')
     parser.add_argument("-N", "--noisy", action='store_true')
@@ -42,7 +41,7 @@ def main():
     if args.P:
         if args.noisy:
             print "Packing...\n*****************\n"
-        name = pack(args.script, args.name, args.mods, args.files)
+        name = pack(args.script, args.name, args.files)
 
     if args.S:
         if args.noisy:

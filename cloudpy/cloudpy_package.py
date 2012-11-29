@@ -9,9 +9,9 @@ import uuid
 
 
 class Package(object):
-    def __init__(self, mainfile, name=None, guess_mods=True, guess_files=False):
+    def __init__(self, mainfile, name=None, guess_files=False):
         self.mainfile = mainfile
-        self.df = DepsFinder(mainfile, guess_mods, guess_files)
+        self.df = DepsFinder(mainfile, guess_files)
         self.dt = DirTree(self.df.needed_files)
         self.files = []
         if name:
@@ -47,7 +47,7 @@ class Package(object):
             exec_path = os.path.abspath(self.mainfile)[self.dt.get_cplen():]
             f.write("EXEC=%s\n" % exec_path)
 
-def pack(script, name, mods, files):
-    p = Package(script, name, mods, files)
+def pack(script, name, files):
+    p = Package(script, name, files)
     p.build()
     return p.name
