@@ -26,9 +26,6 @@ Clean.
 
 =======
 
-cloudpy
-=======
-
 cloudpy可以将python程序（以及依赖的库和文件）打包至另一台机器，自动配置依赖的虚拟环境并实时返回结果。
 
 cloudpy使用ssh在远程主机操作，因此需要能使用publish key 登陆ssh到远程主机。
