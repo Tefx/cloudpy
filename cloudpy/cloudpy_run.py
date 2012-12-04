@@ -21,6 +21,6 @@ def run(package, noisy, clean, config):
         sys.stdout.write(line)
 
     try:
-        sh.ssh("-t", config.host, eval_prog, target, _out=print_line, err=print_line, _tty_in=True).wait()
+        sh.ssh("-t", config.host, eval_prog, target, _out=print_line, _err=print_line, _tty_in=True).wait()
     except Exception:
         pass
