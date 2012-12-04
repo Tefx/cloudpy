@@ -52,7 +52,10 @@ class Agent(object):
 
     def run(self, clean):
         sh.cd(self.working_dir)
-        sh.python(self.mainfile, _out=self.print_output).wait()
+        try:
+            sh.python(self.mainfile, _out=self.print_output, _err=self.print_output).wait()
+        except Exception:
+            pass
         if clean:
             self.clean()
 

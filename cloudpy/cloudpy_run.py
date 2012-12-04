@@ -20,4 +20,7 @@ def run(package, noisy, clean, config):
             return
         sys.stdout.write(line)
 
-    sh.ssh("-t", config.host, eval_prog, target, _out=print_line, _tty_in=True).wait()
+    try:
+        sh.ssh("-t", config.host, eval_prog, target, _out=print_line, err=print_line, _tty_in=True).wait()
+    except Exception:
+        pass

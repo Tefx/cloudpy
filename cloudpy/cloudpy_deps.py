@@ -38,7 +38,7 @@ class DepsFinder(object):
                                 v = pkg_resources.get_distribution(m).version
                                 self.mods[m] = v
                             except pkg_resources.DistributionNotFound:
-                                self.guess_mod(m.__name__, True)
+                                self.guess_mod(m, True)
                     elif not (f.startswith(self.std_path) or f.startswith(self.std_path2)):
                         f = self.pyc2py(f)
                         if f not in self.needed_files:
