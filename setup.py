@@ -3,12 +3,12 @@
 from setuptools import setup
 
 setup(name='cloudpy',
-      version='0.2.1',
+      version='0.2.2',
       description='Run Python Scripts in virtual environment on an remote host',
       author='Zhu Zhaomeng',
       author_email='zhaomeng.zhu@gmail.com',
       packages=['cloudpy'],
-      install_requires=["sh>=1.07"],
+      install_requires=["sh>=1.07", "argparse>=1.2.1"],
       url="https://github.com/Tefx/cloudpy",
       entry_points=dict(console_scripts=[
                           'cloudpy=cloudpy.cloudpy_main:main',

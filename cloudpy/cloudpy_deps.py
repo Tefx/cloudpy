@@ -114,7 +114,12 @@ class DepsFinder(object):
 
     def list_installed(self):
         output = sh.pip.freeze()
-        return {k:v for k,v in [line.strip().split("==") for line in output.split() if "==" in line]}
+        d = {}
+        for line in output.split():
+            if "==" in line:
+                k,v = line.strip().split("==")
+                d[k] = v
+        return d
 
     def search_pypi(self, name):
         if not hasattr(self, "xmlclient"):
@@ -125,7 +130,10 @@ class DepsFinder(object):
     def guess_mod_installed(self, name):
         if not hasattr(self, "installed_mods"):
             self.installed_mods = self.list_installed()
-        search_result = {x:self.installed_mods[x] for x in self.search_pypi(name) if x in self.installed_mods}
+        search_result = {}
+        for x in self.search_pypi(name):
+            if x in self.installed_mods:
+                search_result[x] = self.installed_mods[x]
         if not search_result:
             if name not in self.unknown_mods:
                 self.unknown_mods.append(name)
@@ -139,7 +147,10 @@ class DepsFinder(object):
     def guess_mod_not_installed(self, name):
         if not hasattr(self, "installed_mods"):
             self.installed_mods = self.list_installed()
-        search_result = {x:None for x in self.search_pypi(name) if x not in self.installed_mods}
+        search_result = {}
+        for x in self.search_pypi(name):
+            if x not in self.installed_mods:
+                search_result[x] = None
         if not search_result:
             if name not in self.unknown_mods:
                 self.unknown_mods.append(name)
