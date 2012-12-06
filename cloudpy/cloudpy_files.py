@@ -38,26 +38,3 @@ class DirTree(object):
                 self.cplen = len(os.path.abspath(os.sep.join(common_prefix)))
                 self.cplen = self.cplen + 1
                 return self.cplen
-
-
-class Files(object):
-    def __init__(self, files):
-        self.files = files
-        self.pwd = os.getcwd()
-        self.dt = DirTree([f.split(os.sep) for f in files], self.pwd)
-        self.base = uuid.uuid1().hex
-
-    def build_targz(self):
-        self.build()
-        subprocess.call(["tar", "-czf", "%s.tar.gz" % self.base, self.base])
-        shutil.rmtree(self.base)
-        return os.path.abspath("%s.tar.gz" % self.base)
-
-
-
-if __name__ == '__main__':
-    fs = ['/Users/zzm/Desktop/Piranha/Piranha/project.py', '/Users/zzm/Desktop/Piranha/Piranha/queue.py', '/Users/zzm/Desktop/Piranha/Piranha/structs.py', '/Users/zzm/Desktop/Husky/Husky/__init__.py', '/Users/zzm/Desktop/Husky/Husky/wrap.py', '/Users/zzm/Desktop/Husky/Husky/iterable_husky.py', '/Users/zzm/Desktop/Husky/Husky/dict_husky.py', '/Users/zzm/Desktop/Husky/Husky/function_husky.py', '/Users/zzm/Desktop/Husky/Husky/module_husky.py', '/Users/zzm/Desktop/Husky/Husky/type_husky.py', '/Users/zzm/Desktop/Thinkpol/Thinkpol/__init__.py', '/Users/zzm/Desktop/Thinkpol/Thinkpol/telescreen.py', '/Users/zzm/Desktop/Thinkpol/Thinkpol/miniture.py', '/Users/zzm/Desktop/Thinkpol/Thinkpol/port.py', '/Users/zzm/Desktop/Piranha/Piranha/supervisor.py', '/Users/zzm/Desktop/Thinkpol/Thinkpol/agent.py', '/Users/zzm/Desktop/Piranha/config.py', '/Users/zzm/Desktop/Piranha/Piranha/task.py']
-    files = Files(fs, fs[0])
-    files.build_targz()
-    print files.get_execfile_path()
-    print files.get_pwd()

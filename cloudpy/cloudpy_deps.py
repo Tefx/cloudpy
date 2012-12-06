@@ -1,10 +1,9 @@
 import ast
 import os
 import sys
-import distutils
+from distutils import sysconfig
 import pkg_resources
 import xmlrpclib
-import sh
 import types
 from cloudpy_files import DirTree
 import traceback
@@ -20,9 +19,10 @@ class DepsFinder(object):
         self.unknown_mods = []
         self.guessed_mods = {}
         self.suggested_mods = {}
-        self.std_path = distutils.sysconfig.get_python_lib(standard_lib=True, prefix=os.path.realpath(sys.prefix))
-        self.std_path2 = distutils.sysconfig.get_python_lib(standard_lib=True)
-        self.third_path = distutils.sysconfig.get_python_lib(standard_lib=False)
+        self.list_installed()
+        self.std_path = sysconfig.get_python_lib(standard_lib=True, prefix=os.path.realpath(sys.prefix))
+        self.std_path2 = sysconfig.get_python_lib(standard_lib=True)
+        self.third_path = sysconfig.get_python_lib(standard_lib=False)
         self.guess_files = guess_files
         self.cal_deps(self.mainfile)
 
@@ -113,13 +113,9 @@ class DepsFinder(object):
             return path
 
     def list_installed(self):
-        output = sh.pip.freeze()
-        d = {}
-        for line in output.split():
-            if "==" in line:
-                k,v = line.strip().split("==")
-                d[k] = v
-        return d
+        self.installed_mods = {}
+        for d in pkg_resources.working_set:
+            self.installed_mods[d.project_name] = d.version
 
     def search_pypi(self, name):
         if not hasattr(self, "xmlclient"):
@@ -128,8 +124,6 @@ class DepsFinder(object):
         return [x["name"] for x in search_result]
 
     def guess_mod_installed(self, name):
-        if not hasattr(self, "installed_mods"):
-            self.installed_mods = self.list_installed()
         search_result = {}
         for x in self.search_pypi(name):
             if x in self.installed_mods:
@@ -145,8 +139,6 @@ class DepsFinder(object):
             self.suggested_mods[name] = search_result
 
     def guess_mod_not_installed(self, name):
-        if not hasattr(self, "installed_mods"):
-            self.installed_mods = self.list_installed()
         search_result = {}
         for x in self.search_pypi(name):
             if x not in self.installed_mods:
@@ -235,6 +227,6 @@ if __name__ == '__main__':
     print mf.guessed_mods
     print mf.suggested_mods
     # print mf.needed_files
-    mf.write2file_mods("test")
+    # mf.write2file_mods("test")
 
 

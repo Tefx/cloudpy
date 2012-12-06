@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-import sh
+import shutil
 from sys import argv
 
 def clean(tmp_dir):
-    sh.rm("-rf", tmp_dir)
+    shutil.rmtree(tmp_dir)

@@ -42,9 +42,11 @@ class Package(object):
         with open(self.dir.CONF_FILE, "w") as f:
             pwd = os.getcwd()[self.dt.get_cplen():]
             if not pwd:
-                pwd = "./"
+                pwd = "."
+            pwd = " ".join(pwd.split(os.path.sep))
             f.write("PWD=%s\n" % pwd)
             exec_path = os.path.abspath(self.mainfile)[self.dt.get_cplen():]
+            exec_path = " ".join(exec_path.split(os.path.sep))
             f.write("EXEC=%s\n" % exec_path)
 
 def pack(script, name, files):

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import sh
 from sys import argv
 import argparse
 
@@ -9,7 +8,6 @@ from cloudpy import sync
 from cloudpy import run
 from cloudpy import clean
 from cloudpy import Config
-from cloudpy import Agent
 
 def main():
     parser = argparse.ArgumentParser(description='package a python script.')
@@ -64,7 +62,8 @@ def eval():
     parser.add_argument("-q", "--quiet", action='store_true')
     parser.add_argument("-c", "--clean", action='store_true')
     args = parser.parse_args(argv[1:])
-
+    
+    from cloudpy import Agent
     agent = Agent(args.package)
     agent.setup_env(args.quiet)
     if not args.quiet:
